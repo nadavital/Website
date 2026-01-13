@@ -83,11 +83,13 @@ export default function BlogPost({ post }) {
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={post.description} />
         <meta property="og:type" content="article" />
+        <meta property="og:image" content={`https://nadavavital.com${post.ogImage || '/og-image.jpeg'}`} />
         <meta property="article:published_time" content={post.date} />
         <meta property="article:author" content="Nadav Avital" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={post.title} />
         <meta name="twitter:description" content={post.description} />
+        <meta name="twitter:image" content={`https://nadavavital.com${post.ogImage || '/og-image.jpeg'}`} />
       </Head>
 
       <main className="page page-blog">

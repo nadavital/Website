@@ -2,6 +2,7 @@
 title: Cauldron & The New Age of Software Engineering
 date: 2025-01-13
 description: Building my recipe app with AI-assisted development and lessons learned about the future of software engineering.
+ogImage: /assets/cauldron/cauldronicon.jpg
 app:
   name: Cauldron
   tagline: Your AI-powered recipe book
