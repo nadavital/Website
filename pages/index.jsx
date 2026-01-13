@@ -27,6 +27,10 @@ export default function Home() {
           <Link href="/cauldron" className="link-cauldron">Cauldron</Link>
         </nav>
 
+        <nav className="apps">
+          <Link href="/blog" className="link-blog">Blog</Link>
+        </nav>
+
         <p className="experience">Software Engineer on Checkout at eBay</p>
         <p className="experience-sub">Previously Anodot · UCSB CS '24</p>
 
