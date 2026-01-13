@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -75,22 +75,35 @@ export default function BlogPost({ post }) {
   const parsedContent = parseMarkdown(post.content);
   const readingTime = getReadingTime(post.content);
 
+  const ogImageUrl = `https://nadavavital.com${post.ogImage || '/og-image.jpeg'}`;
+  const canonicalUrl = `https://nadavavital.com/blog/${post.slug}`;
+
   return (
     <>
-      <Head>
-        <title>{post.title} — Nadav Avital</title>
-        <meta name="description" content={post.description} />
-        <meta property="og:title" content={post.title} />
-        <meta property="og:description" content={post.description} />
-        <meta property="og:type" content="article" />
-        <meta property="og:image" content={`https://nadavavital.com${post.ogImage || '/og-image.jpeg'}`} />
-        <meta property="article:published_time" content={post.date} />
-        <meta property="article:author" content="Nadav Avital" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={post.title} />
-        <meta name="twitter:description" content={post.description} />
-        <meta name="twitter:image" content={`https://nadavavital.com${post.ogImage || '/og-image.jpeg'}`} />
-      </Head>
+      <NextSeo
+        title={`Nadav Avital - ${post.title}`}
+        description={post.description}
+        canonical={canonicalUrl}
+        openGraph={{
+          url: canonicalUrl,
+          title: post.title,
+          description: post.description,
+          type: 'article',
+          article: {
+            publishedTime: post.date,
+            authors: ['Nadav Avital'],
+          },
+          images: [
+            {
+              url: ogImageUrl,
+              alt: post.title,
+            },
+          ],
+        }}
+        twitter={{
+          cardType: 'summary_large_image',
+        }}
+      />
 
       <main className="page page-blog">
         <Link href="/blog" className="back-link">
