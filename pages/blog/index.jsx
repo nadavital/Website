@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 import { getAllPosts } from '../../src/data/posts';
 
@@ -14,10 +14,11 @@ function formatDate(dateString) {
 export default function BlogIndex({ posts }) {
   return (
     <>
-      <Head>
-        <title>Blog — Nadav Avital</title>
-        <meta name="description" content="Thoughts on software engineering, AI-assisted development, and building apps." />
-      </Head>
+      <NextSeo
+        title="Nadav Avital - Blog"
+        description="Thoughts on software engineering, AI-assisted development, and building apps."
+        canonical="https://nadavavital.com/blog"
+      />
 
       <main className="page page-blog">
         <Link href="/" className="back-link">
