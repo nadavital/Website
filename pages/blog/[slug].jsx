@@ -21,9 +21,24 @@ function getReadingTime(content) {
 }
 
 function parseMarkdown(content) {
+  const blocks = [];
+  let currentIndex = 0;
+
+  // Check for TLDR block at the start (handle leading whitespace and different line endings)
+  const trimmedContent = content.trim();
+  const tldrMatch = trimmedContent.match(/^:::tldr\s*\n([\s\S]*?)\n\s*:::/);
+  if (tldrMatch) {
+    blocks.push({ type: 'tldr', content: tldrMatch[1].trim(), key: currentIndex++ });
+    content = trimmedContent.slice(tldrMatch[0].length).trim();
+  } else {
+    content = trimmedContent;
+  }
+
   const paragraphs = content.split('\n\n');
 
-  return paragraphs.map((paragraph, index) => {
+  paragraphs.forEach((paragraph) => {
+    if (!paragraph.trim()) return;
+
     let processed = paragraph.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
 
     // Handle links - internal links stay in same tab, external open in new tab
@@ -36,11 +51,13 @@ function parseMarkdown(content) {
     });
 
     if (paragraph.startsWith('**')) {
-      return { type: 'tip', content: processed, key: index };
+      blocks.push({ type: 'tip', content: processed, key: currentIndex++ });
+    } else {
+      blocks.push({ type: 'paragraph', content: processed, key: currentIndex++ });
     }
-
-    return { type: 'paragraph', content: processed, key: index };
   });
+
+  return blocks;
 }
 
 export default function BlogPost({ post }) {
@@ -147,13 +164,23 @@ export default function BlogPost({ post }) {
           )}
 
           <div className="article-content">
-            {parsedContent.map((block) => (
-              <p
-                key={block.key}
-                className={block.type === 'tip' ? 'tip' : undefined}
-                dangerouslySetInnerHTML={{ __html: block.content }}
-              />
-            ))}
+            {parsedContent.map((block) => {
+              if (block.type === 'tldr') {
+                return (
+                  <details key={block.key} className="tldr-card">
+                    <summary>TLDR</summary>
+                    <p>{block.content}</p>
+                  </details>
+                );
+              }
+              return (
+                <p
+                  key={block.key}
+                  className={block.type === 'tip' ? 'tip' : undefined}
+                  dangerouslySetInnerHTML={{ __html: block.content }}
+                />
+              );
+            })}
           </div>
 
           <div className="share-section">

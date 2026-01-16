@@ -770,6 +770,52 @@ button:focus-visible {
   border-radius: 0 8px 8px 0;
 }
 
+/* TLDR Card */
+.article-content .tldr-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 32px;
+  overflow: hidden;
+}
+
+.article-content .tldr-card summary {
+  padding: 14px 20px;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.article-content .tldr-card summary::-webkit-details-marker {
+  display: none;
+}
+
+.article-content .tldr-card summary::before {
+  content: '▸';
+  transition: transform 0.2s ease;
+}
+
+.article-content .tldr-card[open] summary::before {
+  transform: rotate(90deg);
+}
+
+.article-content .tldr-card summary:hover {
+  color: var(--text);
+}
+
+.article-content .tldr-card p {
+  padding: 0 20px 16px;
+  margin: 0;
+  color: var(--text);
+  line-height: 1.7;
+}
+
 /* Share Section */
 .share-section {
   display: flex;

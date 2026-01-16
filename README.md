@@ -1,3 +1,3 @@
-#  Portfolio
+# nadavavital.com
 
-Personal portfolio website with a glass-morphism design. The project now uses Next.js for server-side rendering and improved SEO.
+Source code for my personal website: [nadavavital.com](https://nadavavital.com)

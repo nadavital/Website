@@ -1,6 +1,6 @@
 ---
 title: Cauldron & The New Age of Software Engineering
-date: 2025-01-13
+date: 2026-01-16
 description: Building my recipe app with AI-assisted development and lessons learned about the future of software engineering.
 ogImage: /assets/cauldron/cauldronicon.jpg
 app:
@@ -10,6 +10,10 @@ app:
   page: /cauldron
   download: https://apps.apple.com/us/app/cauldron-magical-recipes/id6754004943
 ---
+
+:::tldr
+I built Cauldron — a recipe app that imports from anywhere, generates recipes with on-device AI, and connects you with friends — almost entirely using Claude Code. This post shares what I learned about AI-assisted development: it's not magic, and "I built an app in 5 minutes" is a myth. The real power comes from being explicit, maintaining context, and treating AI as a collaborator that amplifies your vision rather than replaces it.
+:::
 
 After publishing my first app PlayCount last year, my dad came to me with a problem: he had no way to organize our family recipes. We'd always talked about creating a family cookbook, but I felt like there could be something better.
 
