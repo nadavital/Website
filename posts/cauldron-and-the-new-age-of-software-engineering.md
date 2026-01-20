@@ -17,7 +17,7 @@ I built Cauldron, a recipe app that imports from anywhere, generates recipes wit
 
 After publishing my first app [PlayCount](/playcount) last year, my dad came to me with a problem: he had no way to organize our family recipes. We'd always talked about creating a family cookbook, but I felt like there could be something better.
 
-Looking at apps on the App Store, every option had a limit, a subscription, or an outdated design. I wanted a modern app that showcases your recipes, lets you categorize and share them, and generates new ones when you don't know what to make. That's how Cauldron came to be.
+Looking at apps on the App Store, every option had a limit or an outdated design. I wanted a modern app that showcases your recipes, lets you categorize and share them, and generates new ones when you don't know what to make. That's how Cauldron came to be.
 
 Cauldron lets you import recipes from anywhere (URLs, YouTube videos, Instagram posts, TikTok) with intelligent parsing that extracts ingredients and steps automatically. It has a cook mode with built-in timers and Live Activities for your lock screen, a smart grocery list that organizes items by category, and on-device AI recipe generation powered by Apple Intelligence. You can connect with friends, share recipes, and browse what others are cooking. It's everything I wished existed in one place.
 
@@ -39,6 +39,7 @@ Here are the top lessons I learned (some the hard way) while building Cauldron:
 
 **Manage context with intention.** Maintain a detailed but concise instructions file that tells the agent what it's working on and where to find specific guidance: style guidelines, framework documentation for things released after its training cutoff, roadmaps. Another rising concept is continuity ledgers: telling the agent to track its changes so you can start new sessions exactly where you left off. This saves precious context and improves output quality.
 
-Building with AI is the next frontier of software engineering, turning you into a 100x engineer, product manager, and decision maker in any codebase. As we use these new tools to accelerate our software output, apps will increase in functionality exponentially, becoming personalized for every user with features we've barely begun to explore. This will create even more demand for engineering skills, and the skills engineers have built in traditional development will make them the leaders in the agentic future ahead.
+Building with AI is the next frontier of software engineering, turning you into a 100x engineer, product manager, and decision maker in any codebase. As we use these new tools to accelerate our software output, apps will increase in functionality exponentially, becoming personalized for every user with features we've barely begun to explore. This will create even more demand for engineering skills. Engineers who adopt and stay ahead of these AI tools will be the leaders in the agentic  
+  future—their traditional development skills give them a significant head start.
 
 I'm already applying these lessons to my next app, and coming up with new ways I can incorporate AI into my product building workflow. I'm sure I'll write another post soon sharing what else I've been building... If you want to see what building this way looks like, [download Cauldron on the App Store](https://apps.apple.com/us/app/cauldron-magical-recipes/id6754004943), [add me](https://cauldron-f900a.web.app/u/nadav), and check out [my challah recipe](https://nadavavital.com/challah).
