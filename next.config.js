@@ -18,7 +18,7 @@ const nextConfig = {
       },
       {
         source: '/challah',
-        destination: 'https://cauldron-f900a.web.app/u/nadav/D93FCA73-EAFC-42D0-AA63-460A88D00515',
+        destination: 'https://cauldron-f900a.web.app/u/nadav/8E378D59-C254-4586-A8FD-08A4304A1B0B',
         permanent: false,
       },
     ];

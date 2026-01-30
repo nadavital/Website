@@ -32,7 +32,7 @@ export default function Home() {
         </nav>
 
         <p className="experience">Software Engineer on Checkout at eBay</p>
-        <p className="experience-sub">Previously Anodot · UCSB CS '24</p>
+        <p className="experience-sub">UCSB CS '24</p>
 
         <nav className="links">
           <a href="https://github.com/nadavital" target="_blank" rel="noopener noreferrer">github</a>
