@@ -2,6 +2,8 @@ import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { getAllPosts, getPostBySlug } from '../../src/data/posts';
 
 function formatDate(dateString) {
@@ -20,44 +22,21 @@ function getReadingTime(content) {
   return `${minutes} min read`;
 }
 
-function parseMarkdown(content) {
-  const blocks = [];
-  let currentIndex = 0;
-
-  // Check for TLDR block at the start (handle leading whitespace and different line endings)
+function extractTldr(content) {
   const trimmedContent = content.trim();
   const tldrMatch = trimmedContent.match(/^:::tldr\s*\n([\s\S]*?)\n\s*:::/);
-  if (tldrMatch) {
-    blocks.push({ type: 'tldr', content: tldrMatch[1].trim(), key: currentIndex++ });
-    content = trimmedContent.slice(tldrMatch[0].length).trim();
-  } else {
-    content = trimmedContent;
+
+  if (!tldrMatch) {
+    return {
+      tldr: null,
+      markdown: trimmedContent
+    };
   }
 
-  const paragraphs = content.split('\n\n');
-
-  paragraphs.forEach((paragraph) => {
-    if (!paragraph.trim()) return;
-
-    let processed = paragraph.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-
-    // Handle links - internal links stay in same tab, external open in new tab
-    processed = processed.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, text, url) => {
-      const isExternal = url.startsWith('http');
-      if (isExternal) {
-        return `<a href="${url}" target="_blank" rel="noopener noreferrer">${text}</a>`;
-      }
-      return `<a href="${url}">${text}</a>`;
-    });
-
-    if (paragraph.startsWith('**')) {
-      blocks.push({ type: 'tip', content: processed, key: currentIndex++ });
-    } else {
-      blocks.push({ type: 'paragraph', content: processed, key: currentIndex++ });
-    }
-  });
-
-  return blocks;
+  return {
+    tldr: tldrMatch[1].trim(),
+    markdown: trimmedContent.slice(tldrMatch[0].length).trim()
+  };
 }
 
 export default function BlogPost({ post }) {
@@ -89,7 +68,7 @@ export default function BlogPost({ post }) {
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 
-  const parsedContent = parseMarkdown(post.content);
+  const { tldr, markdown } = extractTldr(post.content);
   const readingTime = getReadingTime(post.content);
 
   const ogImageUrl = `https://nadavavital.com${post.ogImage || '/og-image.jpeg'}`;
@@ -164,23 +143,35 @@ export default function BlogPost({ post }) {
           )}
 
           <div className="article-content">
-            {parsedContent.map((block) => {
-              if (block.type === 'tldr') {
-                return (
-                  <details key={block.key} className="tldr-card">
-                    <summary>TLDR</summary>
-                    <p>{block.content}</p>
-                  </details>
-                );
-              }
-              return (
-                <p
-                  key={block.key}
-                  className={block.type === 'tip' ? 'tip' : undefined}
-                  dangerouslySetInnerHTML={{ __html: block.content }}
-                />
-              );
-            })}
+            {tldr && (
+              <details className="tldr-card">
+                <summary>TLDR</summary>
+                <p>{tldr}</p>
+              </details>
+            )}
+
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              components={{
+                a: ({ href = '', children, ...props }) => {
+                  const isExternal = href.startsWith('http');
+                  if (isExternal) {
+                    return (
+                      <a href={href} target="_blank" rel="noopener noreferrer" {...props}>
+                        {children}
+                      </a>
+                    );
+                  }
+                  return (
+                    <a href={href} {...props}>
+                      {children}
+                    </a>
+                  );
+                }
+              }}
+            >
+              {markdown}
+            </ReactMarkdown>
           </div>
 
           <div className="share-section">
